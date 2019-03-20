@@ -1,5 +1,6 @@
 package ru.eyelog.roompatternkt
 
+import android.app.Application
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 
@@ -8,13 +9,13 @@ import org.junit.runner.RunWith
 
 import org.junit.Before
 import android.arch.persistence.room.Room
-import android.util.Log
 import org.junit.After
+import org.junit.Assert.*
 
 @RunWith(AndroidJUnit4::class)
 class FullDBTest {
 
-    val TAG : String = "Logcat"
+    val TAG : String = "Logcat: "
 
     private var db: AppDataBase? = null
     private var userDao: UserDao? = null
@@ -24,8 +25,9 @@ class FullDBTest {
     @Before
     @Throws(Exception::class)
     fun createDb() {
+
         db = Room.inMemoryDatabaseBuilder(
-            InstrumentationRegistry.getContext(),
+            AppUtil.context!!.applicationContext,
             AppDataBase::class.java
         )
             .build()
@@ -39,15 +41,12 @@ class FullDBTest {
         userDao!!.add(User(0, "One", 1))
         userDao!!.add(User(0, "Two", 2))
         userDao!!.add(User(0, "Three", 3))
-    }
 
-    @Test
-    @Throws(Exception::class)
-    fun readSomeData(){
         users = AppUtil.dataBase?.getUserDao()?.getAllData()!!
-        users.forEach{
-            Log.i(TAG, it.name)
-        }
+        assertNotEquals(0, users.size)
+
+        println(TAG + users.size)
+
     }
 
     @Test
@@ -65,7 +64,7 @@ class FullDBTest {
     fun readUpdatedData(){
         users = AppUtil.dataBase?.getUserDao()?.getAllData()!!
         users.forEach{
-            Log.i(TAG, it.name)
+            println(TAG + it.name)
         }
     }
 
