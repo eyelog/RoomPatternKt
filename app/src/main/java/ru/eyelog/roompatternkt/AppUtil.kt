@@ -10,6 +10,7 @@ class AppUtil : Application() {
 
     companion object {
         var dataBase: AppDataBase? = null
+        @SuppressLint("StaticFieldLeak")
         var context: Context? = null
     }
 

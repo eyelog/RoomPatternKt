@@ -1,17 +1,14 @@
 package ru.eyelog.roompatternkt
 
 import android.content.Context
-import android.util.Log
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 
-import org.junit.Before
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.*
-import org.mockito.runners.MockitoJUnitRunner
-import ru.eyelog.roompatternkt.AppUtil.Companion.dataBase
+import org.mockito.junit.MockitoJUnitRunner
 
 private const val FAKE_STRING = "Some text"
 
